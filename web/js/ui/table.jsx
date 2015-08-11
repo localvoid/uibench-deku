@@ -32,9 +32,9 @@ let TableRow = {
     }
     var cells = data.props;
 
-    var children = [(<TableCell key="-1" text={'#' + data.id}></TableCell>)];
+    var children = [(<TableCell text={'#' + data.id}></TableCell>)];
     for (var i = 0; i < cells.length; i++) {
-      children.push((<TableCell key={i} text={cells[i]}></TableCell>));
+      children.push((<TableCell text={cells[i]}></TableCell>));
     }
 
     return (<tr class={classes} data-id={data.id}>{children}</tr>);
