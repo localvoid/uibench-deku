@@ -2,7 +2,7 @@ import element from 'virtual-element'
 import {tree, deku, render} from 'deku'
 import {Main} from './ui/main';
 
-uibench.init('Deku', '0.5.0');
+uibench.init('Deku', '0.5.4');
 
 document.addEventListener('DOMContentLoaded', function(e) {
   var container = document.querySelector('#App');
