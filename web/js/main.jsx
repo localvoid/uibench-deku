@@ -1,8 +1,10 @@
-import element from 'virtual-element'
+/** @jsx element */
+
+import element from 'virtual-element';
 import {tree, deku, render} from 'deku'
 import {Main} from './ui/main';
 
-uibench.init('Deku', '0.5.4');
+uibench.init('Deku', '1.0.0');
 
 document.addEventListener('DOMContentLoaded', function(e) {
   var container = document.querySelector('#App');

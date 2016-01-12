@@ -1,3 +1,5 @@
+/** @jsx element */
+
 import element from 'virtual-element'
 
 import {Table} from './table';
