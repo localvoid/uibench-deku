@@ -6,7 +6,7 @@ let AnimBox = {
   render({props}) {
     var data = props.data;
     var time = data.time;
-    var style = `borderRadius: ${(time % 10).toString()}px; background: rgba(0,0,0,${(0.5 + ((time % 10) /10)).toString()})`;
+    var style = `border-radius: ${(time % 10).toString()}px; background: rgba(0,0,0,${(0.5 + ((time % 10) /10)).toString()})`;
 
     return <div class="AnimBox" data-id={data.id} style={style} />;
   }
