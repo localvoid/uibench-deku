@@ -3,12 +3,8 @@
 import { element } from 'deku'
 
 let AnimBox = {
-  shouldUpdate(component, nextProps, nextState) {
-    return component.props.data !== nextProps.data;
-  },
-
-  render(component, setState) {
-    var data = component.props.data;
+  render({props}) {
+    var data = props.data;
     var time = data.time;
     var style = {
       'borderRadius': (time % 10).toString() + 'px',
@@ -20,12 +16,8 @@ let AnimBox = {
 };
 
 export let Anim = {
-  shouldUpdate(component, nextProps, nextState) {
-    return component.props.data !== nextProps.data;
-  },
-
-  render(component, setState) {
-    var data = component.props.data;
+  render({props}) {
+    var data = props.data;
     var items = data.items;
 
     var children = [];

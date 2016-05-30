@@ -7,12 +7,8 @@ import {Anim} from './anim';
 import {Tree} from './tree';
 
 export let Main = {
-  shouldUpdate(component, nextProps, nextState) {
-    return component.props.data !== nextProps.data;
-  },
-
-  render(component, setState) {
-    var data = component.props.data;
+  render({props}) {
+    var data = props.data;
     var location = data.location;
 
     var section;

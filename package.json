@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "deku": "git://github.com/heilage-nsk/deku.git",
+    "deku-stateful": "^1.4.0",
     "virtual-element": "^1.2.0"
   },
   "devDependencies": {

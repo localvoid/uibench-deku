@@ -1,9 +1,10 @@
 /** @jsx element */
 
 import { element } from 'deku'
+import stateful from 'deku-stateful'
 
-let TableCell = {
-  initialState(props) {
+let TableCell = stateful({
+  initialState({props}) {
     return {
         onClick: function(e) {
           console.log('Clicked' + props.text);
@@ -12,22 +13,14 @@ let TableCell = {
     };
   },
 
-  shouldUpdate(component, nextProps, nextState) {
-    return component.props.text !== nextProps.text;
-  },
-
-  render(component, setState) {
-    return (<td class="TableCell" onClick={component.state.onClick}>{component.props.text}</td>);
+  render({state, setState, props}) {
+    return (<td class="TableCell" onClick={state.onClick}>{props.text}</td>);
   }
-};
+});
 
-let TableRow = {
-  shouldUpdate(component, nextProps, nextState) {
-    return component.props.data !== nextProps.data;
-  },
-
-  render(component, setState) {
-    var data = component.props.data;
+let TableRow = stateful({
+  render({props, setState}) {
+    var data = props.data;
     var classes = 'TableRow';
     if (data.active) {
       classes = 'TableRow active';
@@ -41,15 +34,11 @@ let TableRow = {
 
     return (<tr class={classes} data-id={data.id}>{children}</tr>);
   }
-};
+});
 
-export let Table = {
-  shouldUpdate(component, nextProps, nextState) {
-    return component.props.data !== nextProps.data;
-  },
-
-  render(component, setState) {
-    var items = component.props.data.items;
+export let Table = stateful({
+  render({props, setState}) {
+    var items = props.data.items;
 
     var children = [];
     for (var i = 0; i < items.length; i++) {
@@ -59,4 +48,4 @@ export let Table = {
 
     return (<table class="Table"><tbody>{children}</tbody></table>);
   }
-};
+});

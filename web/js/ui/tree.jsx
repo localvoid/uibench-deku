@@ -1,24 +1,17 @@
 /** @jsx element */
 
 import { element } from 'deku'
+import stateful from 'deku-stateful'
 
-let TreeLeaf = {
-  shouldUpdate(component, nextProps, nextState) {
-    return component.props.data !== nextProps.data;
-  },
-
-  render(component, setState) {
-    return (<li class="TreeLeaf">{component.props.data.id}</li>);
+let TreeLeaf = stateful({
+  render({props, setState}) {
+    return (<li class="TreeLeaf">{props.data.id}</li>);
   }
-};
+});
 
-let TreeNode = {
-  shouldUpdate(component, nextProps, nextState) {
-    return component.props.data !== nextProps.data;
-  },
-
-  render(component, setState) {
-    var data = component.props.data;
+let TreeNode = stateful({
+  render({props, setState}) {
+    var data = props.data;
     var children = [];
 
     for (var i = 0; i < data.children.length; i++) {
@@ -32,14 +25,10 @@ let TreeNode = {
 
     return (<ul class="TreeNode">{children}</ul>);
   }
-};
+});
 
-export let Tree = {
-  shouldUpdate(component, nextProps, nextState) {
-    return component.props.data !== nextProps.data;
-  },
-
-  render(component, setState) {
-    return (<div class="Tree"><TreeNode data={component.props.data.root} /></div>);
+export let Tree = stateful({
+  render({props, setState}) {
+    return (<div class="Tree"><TreeNode data={props.data.root} /></div>);
   }
-};
+});
