@@ -1825,6 +1825,8 @@
 	      section = (0, _deku.element)(_anim.Anim, { data: data.anim });
 	    } else if (location === 'tree') {
 	      section = (0, _deku.element)(_tree.Tree, { data: data.tree });
+	    } else if (location === 'home') {
+	      section = null;
 	    }
 
 	    return (0, _deku.element)(
