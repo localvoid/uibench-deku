@@ -18,6 +18,8 @@ export let Main = {
       section = (<Anim data={data.anim}></Anim>);
     } else if (location === 'tree') {
       section = (<Tree data={data.tree}></Tree>);
+    } else if (location === 'home') {
+      section = null;
     }
 
     return (<div class="Main">{section}</div>);
