@@ -3,7 +3,7 @@
 import { createApp, element } from 'deku';
 import {Main} from './ui/main';
 
-uibench.init('Deku', '2.0.0');
+uibench.init('Deku', '2.0.1');
 
 document.addEventListener('DOMContentLoaded', function(e) {
   var container = document.querySelector('#App');
