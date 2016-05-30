@@ -16,7 +16,7 @@
     "benchmark"
   ],
   "dependencies": {
-    "deku": "^1.0.0",
+    "deku": "git://github.com/heilage-nsk/deku.git",
     "virtual-element": "^1.2.0"
   },
   "devDependencies": {
