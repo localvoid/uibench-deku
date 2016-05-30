@@ -1,7 +1,2199 @@
-!function(e){function t(r){if(n[r])return n[r].exports;var o=n[r]={exports:{},id:r,loaded:!1};return e[r].call(o.exports,o,o.exports,t),o.loaded=!0,o.exports}var n={};return t.m=e,t.c=n,t.p="",t(0)}([function(e,t,n){e.exports=n(1)},function(e,t,n){"use strict";var r=n(2),o=n(27);uibench.init("Deku","2.0.0"),document.addEventListener("DOMContentLoaded",function(e){var t=document.querySelector("#App"),n=(0,r.createApp)(t);uibench.run(function(e){n((0,r.element)(o.Main,{data:e}))},function(e){n((0,r.element)("pre",null,JSON.stringify(e,null," ")))})})},function(e,t,n){"use strict";function r(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var n in e)Object.prototype.hasOwnProperty.call(e,n)&&(t[n]=e[n]);return t["default"]=e,t}Object.defineProperty(t,"__esModule",{value:!0}),t.h=t.dom=t.diff=t.vnode=t.string=t.element=t.createApp=void 0;var o=n(3),u=r(o),a=n(4),i=r(a),l=n(13),c=r(l),d=n(15),s=r(d),f=n(26),p=r(f),v=i.create,h=i.create,y=p.create;t.createApp=y,t.element=v,t.string=c,t.vnode=i,t.diff=u,t.dom=s,t.h=h},function(e,t,n){"use strict";function r(e){return e&&e.__esModule?e:{"default":e}}function o(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var n in e)Object.prototype.hasOwnProperty.call(e,n)&&(t[n]=e[n]);return t["default"]=e,t}function u(e,t){var n=h.setAttribute,r=h.removeAttribute,o=[],u=e.attributes,a=t.attributes;for(var i in a)a[i]!==u[i]&&o.push(n(i,a[i],u[i]));for(var i in u)i in a||o.push(r(i,u[i]));return o}function a(e,t,n){function r(e,t,r,d){var s=r?(0,l.createPath)(n,null==r.key?r.index:r.key):null;switch(e){case f:E.push(o(r.item,d,s));break;case p:var h=i(t.item,r.item,s);h.length>0&&E.push(u(t.index,h));break;case v:var h=i(t.item,r.item,s);h.push(c(d)),E.push(u(t.index,h));break;case y:E.push(a(t.index))}}var o=h.insertChild,u=h.updateChild,a=h.removeChild,c=h.insertBefore,s=h.updateChildren,f=d.CREATE,p=d.UPDATE,v=d.MOVE,y=d.REMOVE,m=(0,l.groupByKey)(e.children),b=(0,l.groupByKey)(t.children),g=function(e){return e.key},E=[];return(0,d["default"])(m,b,r,g),s(E)}function i(e,t,n){var r=[],o=h.replaceNode,i=h.setAttribute,c=h.sameNode,d=h.removeNode,s=h.updateThunk;if(null===e||void 0===e)throw new Error("Left node must not be null or undefined");return e===t?(r.push(c()),r):null!=e&&null==t?(r.push(d(e)),r):e.type!==t.type?(r.push(o(e,t,n)),r):(0,l.isText)(t)?(e.nodeValue!==t.nodeValue&&r.push(i("nodeValue",t.nodeValue,e.nodeValue)),r):(0,l.isThunk)(t)?((0,l.isSameThunk)(e,t)?r.push(s(e,t,n)):r.push(o(e,t,n)),r):(0,l.isEmpty)(t)?r:(r=u(e,t),r.push(a(e,t,n)),r)}Object.defineProperty(t,"__esModule",{value:!0}),t.Actions=void 0,t.diffAttributes=u,t.diffChildren=a,t.diffNode=i;var l=n(4),c=n(5),d=o(c),s=n(7),f=r(s),p=function(){return!0},v=function(){return String},h=t.Actions=(0,f["default"])({setAttribute:[String,p,p],removeAttribute:[String,p],insertChild:[p,Number,v],removeChild:[Number],updateChild:[Number,Array],updateChildren:[Array],insertBefore:[Number],replaceNode:[p,p,v],removeNode:[p],sameNode:[],updateThunk:[p,p,v]})},function(e,t){"use strict";function n(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}function r(e){return e&&"undefined"!=typeof Symbol&&e.constructor===Symbol?"symbol":typeof e}function o(e,t){for(var n=arguments.length,o=Array(n>2?n-2:0),a=2;n>a;a++)o[a-2]=arguments[a];if(!e)throw new TypeError("element() needs a type.");t=t||{},o=(o||[]).reduce(u,[]);var i="string"==typeof t.key||"number"==typeof t.key?t.key:void 0;return delete t.key,"object"===("undefined"==typeof e?"undefined":r(e))||"function"==typeof e?l(e,i,t,o):{attributes:t,children:o,type:e,key:i}}function u(e,t){if("string"==typeof t||"number"==typeof t)e.push(a(t));else if(null===t)e.push(i());else if(Array.isArray(t))e=[].concat(n(e),n(t.reduce(u,[])));else{if("undefined"==typeof t)throw new Error("vnode can't be undefined. Did you mean to use null?");e.push(t)}return e}function a(e){return{type:"#text",nodeValue:e}}function i(){return{type:"#empty"}}function l(e,t,n,r){return{type:"#thunk",children:r,props:n,component:e,key:t}}function c(e){return"boolean"==typeof e?e:"function"==typeof e?!1:""===e?!0:void 0===e?!1:null!==e}Object.defineProperty(t,"__esModule",{value:!0}),t.create=o,t.createTextElement=a,t.createEmptyElement=i,t.createThunkElement=l,t.isValidAttribute=c;var d=t.isThunk=function(e){return"#thunk"===e.type};t.isText=function(e){return"#text"===e.type},t.isEmpty=function(e){return"#empty"===e.type},t.isSameThunk=function(e,t){return d(e)&&d(t)&&e.component===t.component},t.groupByKey=function(e){return e.reduce(function(e,t,n){return null!=t&&t!==!1&&e.push({key:String(t.key||n),item:t,index:n}),e},[])},t.createPath=function(){for(var e=arguments.length,t=Array(e),n=0;e>n;n++)t[n]=arguments[n];return t.join(".")}},function(e,t,n){"use strict";function r(e,t,n,r){function s(e,t){return r(e)===r(t)}for(var f=0,p=0,v=e.length-1,h=t.length-1,y=e[f],m=t[p];v>=f&&h>=p&&s(y,m);)n(l,y,m,p),y=e[++f],m=t[++p];if(!(p>h&&f>v)){for(var b=e[v],g=t[h],E=0;v>=f&&h>=p&&s(y,g);)n(c,y,g,v-E+1),y=e[++f],g=t[--h],++E;for(;v>=f&&h>=p&&s(m,b);)n(c,b,m,p),b=e[--v],m=t[++p],--E;for(;v>=f&&h>=p&&s(b,g);)n(l,b,g,h),b=e[--v],g=t[--h];if(f>v)for(;h>=p;)n(i,null,m,p),m=t[++p];else if(p>h)for(;v>=f;)n(d,y),y=e[++f];else{for(var k=0,w=null,A=f-E,x=f,_=(0,a.createBv)(v-f),M=u(e,f,v+1,r);h>=p;m=t[++p]){var T=M[r(m)];o(T)?(n(i,null,m,A++),++k):f!==T?((0,a.setBit)(_,T-x),n(c,e[T],m,A++)):w=p}null!==w&&((0,a.setBit)(_,0),n(c,e[f],t[w],w));for(var O=e.length-t.length+k,C=0;O>C;y=e[++f])(0,a.getBit)(_,f-x)||(n(d,y),++C)}}}function o(e){return"undefined"==typeof e}function u(e,t,n,r){for(var o={},u=t;n>u;++u)o[r(e[u])]=u;return o}Object.defineProperty(t,"__esModule",{value:!0}),t.REMOVE=t.MOVE=t.UPDATE=t.CREATE=void 0;var a=n(6),i=0,l=1,c=2,d=3;t["default"]=r,t.CREATE=i,t.UPDATE=l,t.MOVE=c,t.REMOVE=d},function(e,t){"use strict";function n(e){return new a(Math.ceil(e/32))}function r(e,t){var n=t%32,r=(t-n)/32;e[r]|=1<<n}function o(e,t){var n=t%32,r=(t-n)/32;e[r]&=~(1<<n)}function u(e,t){var n=t%32,r=(t-n)/32;return!!(e[r]&1<<n)}Object.defineProperty(t,"__esModule",{value:!0});var a="undefined"==typeof Uint32Array?Array:Uint32Array;t.createBv=n,t.setBit=r,t.clearBit=o,t.getBit=u},function(e,t,n){function r(e){return"string"==typeof e}function o(e){return"number"==typeof e}function u(e){var t=typeof e;return!!e&&("object"==t||"function"==t)}function a(e){return"function"==typeof e}function i(e,t,n){n=n.map(f(e));var r=d(n.length,function(){for(var r,o,u=[],a=0;a<arguments.length;++a){if(r=arguments[a],o=n[a],!("function"==typeof o&&o(r)||void 0!==r&&null!==r&&r.of===o))throw new TypeError("wrong value "+r+" passed to location "+a+" in "+t);u[a]=arguments[a]}return u.of=e,u.name=t,u});return r}function l(e,t,n,r){if(e!==n.of)throw new TypeError("wrong type passed to case");var o=n.name in t?n.name:"_"in t?"_":void 0;if(void 0===o)throw new Error("unhandled value passed to case");return t[o].apply(void 0,void 0!==r?n.concat([r]):n)}function c(e){var t={};for(var n in e)t[n]=i(t,n,e[n]);return t["case"]=p(t),t.caseOn=v(t),t}var d=n(8),s=Array.isArray||function(e){return"length"in e},f=d(2,function(e,t){return t===String?r:t===Number?o:t===Object?u:t===Array?s:t===Function?a:void 0===t?e:t}),p=d(3,l),v=d(4,l);e.exports=c},function(e,t,n){var r=n(9),o=n(11),u=n(12);e.exports=r(function(e,t){return u(e,o(e,[],t))})},function(e,t,n){var r=n(10);e.exports=function(e){return function t(n,o){var u=arguments.length;return 0===u?t:1===u&&null!=n&&n["@@functional/placeholder"]===!0?t:1===u?r(function(t){return e(n,t)}):2===u&&null!=n&&n["@@functional/placeholder"]===!0&&null!=o&&o["@@functional/placeholder"]===!0?t:2===u&&null!=n&&n["@@functional/placeholder"]===!0?r(function(t){return e(t,o)}):2===u&&null!=o&&o["@@functional/placeholder"]===!0?r(function(t){return e(n,t)}):e(n,o)}}},function(e,t){e.exports=function(e){return function t(n){return 0===arguments.length?t:null!=n&&n["@@functional/placeholder"]===!0?t:e(n)}}},function(e,t,n){var r=n(12);e.exports=function o(e,t,n){return function(){for(var u=[],a=0,i=e,l=0;l<t.length||a<arguments.length;){var c;l<t.length&&(null==t[l]||t[l]["@@functional/placeholder"]!==!0||a>=arguments.length)?c=t[l]:(c=arguments[a],a+=1),u[l]=c,null!=c&&c["@@functional/placeholder"]===!0||(i-=1),l+=1}return 0>=i?n.apply(this,u):r(i,o(e,u,n))}}},function(e,t,n){var r=n(9);e.exports=r(function(e,t){switch(e){case 0:return function(){return t.apply(this,arguments)};case 1:return function(e){return t.apply(this,arguments)};case 2:return function(e,n){return t.apply(this,arguments)};case 3:return function(e,n,r){return t.apply(this,arguments)};case 4:return function(e,n,r,o){return t.apply(this,arguments)};case 5:return function(e,n,r,o,u){return t.apply(this,arguments)};case 6:return function(e,n,r,o,u,a){return t.apply(this,arguments)};case 7:return function(e,n,r,o,u,a,i){return t.apply(this,arguments)};case 8:return function(e,n,r,o,u,a,i,l){return t.apply(this,arguments)};case 9:return function(e,n,r,o,u,a,i,l,c){return t.apply(this,arguments)};case 10:return function(e,n,r,o,u,a,i,l,c,d){return t.apply(this,arguments)};default:throw new Error("First argument to arity must be a non-negative integer no greater than ten")}})},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.render=void 0;var r=n(14),o=r.renderString;t.render=o},function(e,t,n){"use strict";function r(e){var t="";for(var n in e){var r=e[n];"innerHTML"!==n&&(0,u.isValidAttribute)(r)&&(t+=" "+n+'="'+e[n]+'"')}return t}function o(e,t){var n=arguments.length<=2||void 0===arguments[2]?"0":arguments[2];if((0,u.isText)(e))return e.nodeValue;if((0,u.isEmpty)(e))return"<noscript></noscript>";if((0,u.isThunk)(e)){var a=e.props,i=e.component,l=e.children,c=i.render,d=c({children:l,props:a,path:n,context:t});return o(d,t,n)}var s=e.attributes,f=e.type,p=e.children,v=s.innerHTML,h="<"+f+r(s)+">";return h+=v?v:p.map(function(e,r){return o(e,t,n+"."+(null==e.key?r:e.key))}).join(""),h+="</"+f+">"}Object.defineProperty(t,"__esModule",{value:!0}),t.renderString=o;var u=n(4)},function(e,t,n){"use strict";function r(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(t,"__esModule",{value:!0}),t.update=t.create=void 0;var o=n(16),u=r(o),a=n(25),i=r(a);t.create=u["default"],t.update=i["default"]},function(e,t,n){"use strict";function r(e){return e&&e.__esModule?e:{"default":e}}function o(e,t,n,r){if((0,u.isText)(e)){var i="string"==typeof e.nodeValue||"number"==typeof e.nodeValue?e.nodeValue:"";return document.createTextNode(i)}if((0,u.isEmpty)(e))return document.createElement("noscript");if((0,u.isThunk)(e)){var d=e.props,s=e.component,f=e.children,p=s.onCreate,v="function"==typeof s?s:s.render,h={children:f,props:d,path:t,dispatch:n,context:r},y=v(h),m=o(y,(0,u.createPath)(t,y.key||"0"),n,r);return p&&p(h),e.state={vnode:y,model:h},m}var b=c[e.type];"undefined"==typeof b&&(b=c[e.type]=l["default"].isElement(e.type)?document.createElementNS(l["default"].namespace,e.type):document.createElement(e.type));var g=b.cloneNode(!1);for(var E in e.attributes)(0,a.setAttribute)(g,E,e.attributes[E]);return e.children.forEach(function(e,a){if(null!==e&&void 0!==e){var i=o(e,(0,u.createPath)(t,e.key||a),n,r);g.appendChild(i)}}),g}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=o;var u=n(4),a=n(17),i=n(23),l=r(i),c={}},function(e,t,n){"use strict";function r(e){return e&&e.__esModule?e:{"default":e}}function o(e,t,n){var r=v["default"][t];if(r)return void("function"==typeof n&&e.removeEventListener(r,n));switch(t){case"checked":case"disabled":case"selected":e[t]=!1;break;case"innerHTML":case"nodeValue":e.innerHTML="";break;case"value":e.value="";break;default:e.removeAttribute(t)}}function u(e,t,n,r){var u=v["default"][t];if(n!==r){if(u)return"function"==typeof r&&e.removeEventListener(u,r),void e.addEventListener(u,n);if(!(0,l.isValidAttribute)(n))return void o(e,t,r);switch(t){case"checked":case"disabled":case"innerHTML":case"nodeValue":e[t]=n;break;case"selected":if(e.selected=n,"OPTION"===e.tagName&&e.parentNode){var a=e.parentNode;a.selectedIndex=(0,d["default"])(a.options,e)}break;case"value":(0,f["default"])(e,n);break;default:e.setAttributeNS((0,i["default"])(t),t,n)}}}Object.defineProperty(t,"__esModule",{value:!0}),t.removeAttribute=o,t.setAttribute=u;var a=n(18),i=r(a),l=n(4),c=n(19),d=r(c),s=n(20),f=r(s),p=n(22),v=r(p)},function(e,t){"use strict";function n(e){if(-1===e.indexOf(":"))return null;var t=e.split(":",1)[0];if(r.hasOwnProperty(t))return r[t];throw new Error('svg-attribute-namespace: prefix "'+t+'" is not supported by SVG.')}e.exports=e.exports["default"]=n;var r=e.exports.namespaces={ev:"http://www.w3.org/2001/xml-events",xlink:"http://www.w3.org/1999/xlink",xml:"http://www.w3.org/XML/1998/namespace",xmlns:"http://www.w3.org/2000/xmlns/"}},function(e,t){/*!
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(1);
+
+
+/***/ },
+/* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _deku = __webpack_require__(2);
+
+	var _main = __webpack_require__(27);
+
+	/** @jsx element */
+
+	uibench.init('Deku', '2.0.0');
+
+	document.addEventListener('DOMContentLoaded', function (e) {
+	  var container = document.querySelector('#App');
+	  var render = (0, _deku.createApp)(container);
+
+	  uibench.run(function (state) {
+	    render((0, _deku.element)(_main.Main, { data: state }));
+	  }, function (samples) {
+	    render((0, _deku.element)(
+	      'pre',
+	      null,
+	      JSON.stringify(samples, null, ' ')
+	    ));
+	  });
+	});
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.h = exports.dom = exports.diff = exports.vnode = exports.string = exports.element = exports.createApp = undefined;
+
+	var _diff = __webpack_require__(3);
+
+	var diff = _interopRequireWildcard(_diff);
+
+	var _element = __webpack_require__(4);
+
+	var vnode = _interopRequireWildcard(_element);
+
+	var _string = __webpack_require__(13);
+
+	var string = _interopRequireWildcard(_string);
+
+	var _dom = __webpack_require__(15);
+
+	var dom = _interopRequireWildcard(_dom);
+
+	var _app = __webpack_require__(26);
+
+	var app = _interopRequireWildcard(_app);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	var element = vnode.create;
+	var h = vnode.create;
+	var createApp = app.create;
+
+	exports.createApp = createApp;
+	exports.element = element;
+	exports.string = string;
+	exports.vnode = vnode;
+	exports.diff = diff;
+	exports.dom = dom;
+	exports.h = h;
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Actions = undefined;
+	exports.diffAttributes = diffAttributes;
+	exports.diffChildren = diffChildren;
+	exports.diffNode = diffNode;
+
+	var _element = __webpack_require__(4);
+
+	var _dift = __webpack_require__(5);
+
+	var diffActions = _interopRequireWildcard(_dift);
+
+	var _unionType = __webpack_require__(7);
+
+	var _unionType2 = _interopRequireDefault(_unionType);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	var Any = function Any() {
+	  return true;
+	};
+	var Path = function Path() {
+	  return String;
+	};
+
+	/**
+	 * Patch actions
+	 */
+
+	var Actions = exports.Actions = (0, _unionType2.default)({
+	  setAttribute: [String, Any, Any],
+	  removeAttribute: [String, Any],
+	  insertChild: [Any, Number, Path],
+	  removeChild: [Number],
+	  updateChild: [Number, Array],
+	  updateChildren: [Array],
+	  insertBefore: [Number],
+	  replaceNode: [Any, Any, Path],
+	  removeNode: [Any],
+	  sameNode: [],
+	  updateThunk: [Any, Any, Path]
+	});
+
+	/**
+	 * Diff two attribute objects and return an array of actions that represent
+	 * changes to transform the old object into the new one.
+	 */
+
+	function diffAttributes(previous, next) {
+	  var setAttribute = Actions.setAttribute;
+	  var removeAttribute = Actions.removeAttribute;
+
+	  var changes = [];
+	  var pAttrs = previous.attributes;
+	  var nAttrs = next.attributes;
+
+	  for (var name in nAttrs) {
+	    if (nAttrs[name] !== pAttrs[name]) {
+	      changes.push(setAttribute(name, nAttrs[name], pAttrs[name]));
+	    }
+	  }
+
+	  for (var name in pAttrs) {
+	    if (!(name in nAttrs)) {
+	      changes.push(removeAttribute(name, pAttrs[name]));
+	    }
+	  }
+
+	  return changes;
+	}
+
+	/**
+	 * Compare two arrays of virtual nodes and return an array of actions
+	 * to transform the left into the right. A starting path is supplied that use
+	 * recursively to build up unique paths for each node.
+	 */
+
+	function diffChildren(previous, next, parentPath) {
+	  var insertChild = Actions.insertChild;
+	  var updateChild = Actions.updateChild;
+	  var removeChild = Actions.removeChild;
+	  var insertBefore = Actions.insertBefore;
+	  var updateChildren = Actions.updateChildren;
+	  var CREATE = diffActions.CREATE;
+	  var UPDATE = diffActions.UPDATE;
+	  var MOVE = diffActions.MOVE;
+	  var REMOVE = diffActions.REMOVE;
+
+	  var previousChildren = (0, _element.groupByKey)(previous.children);
+	  var nextChildren = (0, _element.groupByKey)(next.children);
+	  var key = function key(a) {
+	    return a.key;
+	  };
+	  var changes = [];
+
+	  function effect(type, prev, next, pos) {
+	    var nextPath = next ? (0, _element.createPath)(parentPath, next.key == null ? next.index : next.key) : null;
+	    switch (type) {
+	      case CREATE:
+	        {
+	          changes.push(insertChild(next.item, pos, nextPath));
+	          break;
+	        }
+	      case UPDATE:
+	        {
+	          var actions = diffNode(prev.item, next.item, nextPath);
+	          if (actions.length > 0) {
+	            changes.push(updateChild(prev.index, actions));
+	          }
+	          break;
+	        }
+	      case MOVE:
+	        {
+	          var actions = diffNode(prev.item, next.item, nextPath);
+	          actions.push(insertBefore(pos));
+	          changes.push(updateChild(prev.index, actions));
+	          break;
+	        }
+	      case REMOVE:
+	        {
+	          changes.push(removeChild(prev.index));
+	          break;
+	        }
+	    }
+	  }
+
+	  (0, diffActions.default)(previousChildren, nextChildren, effect, key);
+
+	  return updateChildren(changes);
+	}
+
+	/**
+	 * Compare two virtual nodes and return an array of changes to turn the left
+	 * into the right.
+	 */
+
+	function diffNode(prev, next, path) {
+	  var changes = [];
+	  var replaceNode = Actions.replaceNode;
+	  var setAttribute = Actions.setAttribute;
+	  var sameNode = Actions.sameNode;
+	  var removeNode = Actions.removeNode;
+	  var updateThunk = Actions.updateThunk;
+
+	  // No left node to compare it to
+	  // TODO: This should just return a createNode action
+
+	  if (prev === null || prev === undefined) {
+	    throw new Error('Left node must not be null or undefined');
+	  }
+
+	  // Bail out and skip updating this whole sub-tree
+	  if (prev === next) {
+	    changes.push(sameNode());
+	    return changes;
+	  }
+
+	  // Remove
+	  if (prev != null && next == null) {
+	    changes.push(removeNode(prev));
+	    return changes;
+	  }
+
+	  // Replace
+	  if (prev.type !== next.type) {
+	    changes.push(replaceNode(prev, next, path));
+	    return changes;
+	  }
+
+	  // Text
+	  if ((0, _element.isText)(next)) {
+	    if (prev.nodeValue !== next.nodeValue) {
+	      changes.push(setAttribute('nodeValue', next.nodeValue, prev.nodeValue));
+	    }
+	    return changes;
+	  }
+
+	  // Thunk
+	  if ((0, _element.isThunk)(next)) {
+	    if ((0, _element.isSameThunk)(prev, next)) {
+	      changes.push(updateThunk(prev, next, path));
+	    } else {
+	      changes.push(replaceNode(prev, next, path));
+	    }
+	    return changes;
+	  }
+
+	  // Empty
+	  if ((0, _element.isEmpty)(next)) {
+	    return changes;
+	  }
+
+	  changes = diffAttributes(prev, next);
+	  changes.push(diffChildren(prev, next, path));
+
+	  return changes;
+	}
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.create = create;
+	exports.createTextElement = createTextElement;
+	exports.createEmptyElement = createEmptyElement;
+	exports.createThunkElement = createThunkElement;
+	exports.isValidAttribute = isValidAttribute;
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+	function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+
+	/**
+	 * This function lets us create virtual nodes using a simple
+	 * syntax. It is compatible with JSX transforms so you can use
+	 * JSX to write nodes that will compile to this function.
+	 *
+	 * let node = element('div', { id: 'foo' }, [
+	 *   element('a', { href: 'http://google.com' },
+	 *     element('span', {}, 'Google'),
+	 *     element('b', {}, 'Link')
+	 *   )
+	 * ])
+	 */
+
+	function create(type, attributes) {
+	  for (var _len = arguments.length, children = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+	    children[_key - 2] = arguments[_key];
+	  }
+
+	  if (!type) throw new TypeError('element() needs a type.');
+
+	  attributes = attributes || {};
+	  children = (children || []).reduce(reduceChildren, []);
+
+	  var key = typeof attributes.key === 'string' || typeof attributes.key === 'number' ? attributes.key : undefined;
+
+	  delete attributes.key;
+
+	  if ((typeof type === 'undefined' ? 'undefined' : _typeof(type)) === 'object' || typeof type === 'function') {
+	    return createThunkElement(type, key, attributes, children);
+	  }
+
+	  return {
+	    attributes: attributes,
+	    children: children,
+	    type: type,
+	    key: key
+	  };
+	}
+
+	/**
+	 * Cleans up the array of child elements.
+	 * - Flattens nested arrays
+	 * - Converts raw strings and numbers into vnodes
+	 * - Filters out undefined elements
+	 */
+
+	function reduceChildren(children, vnode) {
+	  if (typeof vnode === 'string' || typeof vnode === 'number') {
+	    children.push(createTextElement(vnode));
+	  } else if (vnode === null) {
+	    children.push(createEmptyElement());
+	  } else if (Array.isArray(vnode)) {
+	    children = [].concat(_toConsumableArray(children), _toConsumableArray(vnode.reduce(reduceChildren, [])));
+	  } else if (typeof vnode === 'undefined') {
+	    throw new Error('vnode can\'t be undefined. Did you mean to use null?');
+	  } else {
+	    children.push(vnode);
+	  }
+	  return children;
+	}
+
+	/**
+	 * Text nodes are stored as objects to keep things simple
+	 */
+
+	function createTextElement(text) {
+	  return {
+	    type: '#text',
+	    nodeValue: text
+	  };
+	}
+
+	/**
+	 * Text nodes are stored as objects to keep things simple
+	 */
+
+	function createEmptyElement() {
+	  return {
+	    type: '#empty'
+	  };
+	}
+
+	/**
+	 * Lazily-rendered virtual nodes
+	 */
+
+	function createThunkElement(component, key, props, children) {
+	  return {
+	    type: '#thunk',
+	    children: children,
+	    props: props,
+	    component: component,
+	    key: key
+	  };
+	}
+
+	/**
+	 * Is a vnode a thunk?
+	 */
+
+	var isThunk = exports.isThunk = function isThunk(node) {
+	  return node.type === '#thunk';
+	};
+
+	/**
+	 * Is a vnode a text node?
+	 */
+
+	var isText = exports.isText = function isText(node) {
+	  return node.type === '#text';
+	};
+
+	/**
+	 * Is a vnode an empty placeholder?
+	 */
+
+	var isEmpty = exports.isEmpty = function isEmpty(node) {
+	  return node.type === '#empty';
+	};
+
+	/**
+	 * Determine if two virtual nodes are the same type
+	 */
+
+	var isSameThunk = exports.isSameThunk = function isSameThunk(left, right) {
+	  return isThunk(left) && isThunk(right) && left.component === right.component;
+	};
+
+	/**
+	 * Group an array of virtual elements by their key, using index as a fallback.
+	 */
+
+	var groupByKey = exports.groupByKey = function groupByKey(children) {
+	  return children.reduce(function (acc, child, i) {
+	    if (child != null && child !== false) {
+	      acc.push({
+	        key: String(child.key || i),
+	        item: child,
+	        index: i
+	      });
+	    }
+	    return acc;
+	  }, []);
+	};
+
+	/**
+	 * Check if an attribute should be rendered into the DOM.
+	 */
+
+	function isValidAttribute(value) {
+	  if (typeof value === 'boolean') return value;
+	  if (typeof value === 'function') return false;
+	  if (value === '') return true;
+	  if (value === undefined) return false;
+	  if (value === null) return false;
+	  return true;
+	}
+
+	/**
+	 * Create a node path, eg. (23,5,2,4) => '23.5.2.4'
+	 */
+
+	var createPath = exports.createPath = function createPath() {
+	  for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+	    args[_key2] = arguments[_key2];
+	  }
+
+	  return args.join('.');
+	};
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.REMOVE = exports.MOVE = exports.UPDATE = exports.CREATE = undefined;
+
+	var _bitVector = __webpack_require__(6);
+
+	/**
+	 * Actions
+	 */
+
+	var CREATE = 0; /**
+	                 * Imports
+	                 */
+
+	var UPDATE = 1;
+	var MOVE = 2;
+	var REMOVE = 3;
+
+	/**
+	 * dift
+	 */
+
+	function dift(prev, next, effect, key) {
+	  var pStartIdx = 0;
+	  var nStartIdx = 0;
+	  var pEndIdx = prev.length - 1;
+	  var nEndIdx = next.length - 1;
+	  var pStartItem = prev[pStartIdx];
+	  var nStartItem = next[nStartIdx];
+
+	  // List head is the same
+	  while (pStartIdx <= pEndIdx && nStartIdx <= nEndIdx && equal(pStartItem, nStartItem)) {
+	    effect(UPDATE, pStartItem, nStartItem, nStartIdx);
+	    pStartItem = prev[++pStartIdx];
+	    nStartItem = next[++nStartIdx];
+	  }
+
+	  // The above case is orders of magnitude more common than the others, so fast-path it
+	  if (nStartIdx > nEndIdx && pStartIdx > pEndIdx) {
+	    return;
+	  }
+
+	  var pEndItem = prev[pEndIdx];
+	  var nEndItem = next[nEndIdx];
+	  var movedFromFront = 0;
+
+	  // Reversed
+	  while (pStartIdx <= pEndIdx && nStartIdx <= nEndIdx && equal(pStartItem, nEndItem)) {
+	    effect(MOVE, pStartItem, nEndItem, pEndIdx - movedFromFront + 1);
+	    pStartItem = prev[++pStartIdx];
+	    nEndItem = next[--nEndIdx];
+	    ++movedFromFront;
+	  }
+
+	  // Reversed the other way (in case of e.g. reverse and append)
+	  while (pEndIdx >= pStartIdx && nStartIdx <= nEndIdx && equal(nStartItem, pEndItem)) {
+	    effect(MOVE, pEndItem, nStartItem, nStartIdx);
+	    pEndItem = prev[--pEndIdx];
+	    nStartItem = next[++nStartIdx];
+	    --movedFromFront;
+	  }
+
+	  // List tail is the same
+	  while (pEndIdx >= pStartIdx && nEndIdx >= nStartIdx && equal(pEndItem, nEndItem)) {
+	    effect(UPDATE, pEndItem, nEndItem, nEndIdx);
+	    pEndItem = prev[--pEndIdx];
+	    nEndItem = next[--nEndIdx];
+	  }
+
+	  if (pStartIdx > pEndIdx) {
+	    while (nStartIdx <= nEndIdx) {
+	      effect(CREATE, null, nStartItem, nStartIdx);
+	      nStartItem = next[++nStartIdx];
+	    }
+
+	    return;
+	  }
+
+	  if (nStartIdx > nEndIdx) {
+	    while (pStartIdx <= pEndIdx) {
+	      effect(REMOVE, pStartItem);
+	      pStartItem = prev[++pStartIdx];
+	    }
+
+	    return;
+	  }
+
+	  var created = 0;
+	  var pivotDest = null;
+	  var pivotIdx = pStartIdx - movedFromFront;
+	  var keepBase = pStartIdx;
+	  var keep = (0, _bitVector.createBv)(pEndIdx - pStartIdx);
+
+	  var prevMap = keyMap(prev, pStartIdx, pEndIdx + 1, key);
+
+	  for (; nStartIdx <= nEndIdx; nStartItem = next[++nStartIdx]) {
+	    var oldIdx = prevMap[key(nStartItem)];
+
+	    if (isUndefined(oldIdx)) {
+	      effect(CREATE, null, nStartItem, pivotIdx++);
+	      ++created;
+	    } else if (pStartIdx !== oldIdx) {
+	      (0, _bitVector.setBit)(keep, oldIdx - keepBase);
+	      effect(MOVE, prev[oldIdx], nStartItem, pivotIdx++);
+	    } else {
+	      pivotDest = nStartIdx;
+	    }
+	  }
+
+	  if (pivotDest !== null) {
+	    (0, _bitVector.setBit)(keep, 0);
+	    effect(MOVE, prev[pStartIdx], next[pivotDest], pivotDest);
+	  }
+
+	  // If there are no creations, then you have to
+	  // remove exactly max(prevLen - nextLen, 0) elements in this
+	  // diff. You have to remove one more for each element
+	  // that was created. This means once we have
+	  // removed that many, we can stop.
+	  var necessaryRemovals = prev.length - next.length + created;
+	  for (var removals = 0; removals < necessaryRemovals; pStartItem = prev[++pStartIdx]) {
+	    if (!(0, _bitVector.getBit)(keep, pStartIdx - keepBase)) {
+	      effect(REMOVE, pStartItem);
+	      ++removals;
+	    }
+	  }
+
+	  function equal(a, b) {
+	    return key(a) === key(b);
+	  }
+	}
+
+	function isUndefined(val) {
+	  return typeof val === 'undefined';
+	}
+
+	function keyMap(items, start, end, key) {
+	  var map = {};
+
+	  for (var i = start; i < end; ++i) {
+	    map[key(items[i])] = i;
+	  }
+
+	  return map;
+	}
+
+	/**
+	 * Exports
+	 */
+
+	exports.default = dift;
+	exports.CREATE = CREATE;
+	exports.UPDATE = UPDATE;
+	exports.MOVE = MOVE;
+	exports.REMOVE = REMOVE;
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	/**
+	 * Use typed arrays if we can
+	 */
+
+	var FastArray = typeof Uint32Array === 'undefined' ? Array : Uint32Array;
+
+	/**
+	 * Bit vector
+	 */
+
+	function createBv(sizeInBits) {
+	  return new FastArray(Math.ceil(sizeInBits / 32));
+	}
+
+	function setBit(v, idx) {
+	  var r = idx % 32;
+	  var pos = (idx - r) / 32;
+
+	  v[pos] |= 1 << r;
+	}
+
+	function clearBit(v, idx) {
+	  var r = idx % 32;
+	  var pos = (idx - r) / 32;
+
+	  v[pos] &= ~(1 << r);
+	}
+
+	function getBit(v, idx) {
+	  var r = idx % 32;
+	  var pos = (idx - r) / 32;
+
+	  return !!(v[pos] & 1 << r);
+	}
+
+	/**
+	 * Exports
+	 */
+
+	exports.createBv = createBv;
+	exports.setBit = setBit;
+	exports.clearBit = clearBit;
+	exports.getBit = getBit;
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var curryN = __webpack_require__(8);
+
+	function isString(s) { return typeof s === 'string'; }
+	function isNumber(n) { return typeof n === 'number'; }
+	function isObject(value) {
+	  var type = typeof value;
+	  return !!value && (type == 'object' || type == 'function');
+	}
+	function isFunction(f) { return typeof f === 'function'; }
+	var isArray = Array.isArray || function(a) { return 'length' in a; };
+
+	var mapConstrToFn = curryN(2, function(group, constr) {
+	  return constr === String    ? isString
+	       : constr === Number    ? isNumber
+	       : constr === Object    ? isObject
+	       : constr === Array     ? isArray
+	       : constr === Function  ? isFunction
+	       : constr === undefined ? group
+	                              : constr;
+	});
+
+	function Constructor(group, name, validators) {
+	  validators = validators.map(mapConstrToFn(group));
+	  var constructor = curryN(validators.length, function() {
+	    var val = [], v, validator;
+	    for (var i = 0; i < arguments.length; ++i) {
+	      v = arguments[i];
+	      validator = validators[i];
+	      if ((typeof validator === 'function' && validator(v)) ||
+	          (v !== undefined && v !== null && v.of === validator)) {
+	        val[i] = arguments[i];
+	      } else {
+	        throw new TypeError('wrong value ' + v + ' passed to location ' + i + ' in ' + name);
+	      }
+	    }
+	    val.of = group;
+	    val.name = name;
+	    return val;
+	  });
+	  return constructor;
+	}
+
+	function rawCase(type, cases, action, arg) {
+	  if (type !== action.of) throw new TypeError('wrong type passed to case');
+	  var name = action.name in cases ? action.name
+	           : '_' in cases         ? '_'
+	                                  : undefined;
+	  if (name === undefined) {
+	    throw new Error('unhandled value passed to case');
+	  } else {
+	    return cases[name].apply(undefined, arg !== undefined ? action.concat([arg]) : action);
+	  }
+	}
+
+	var typeCase = curryN(3, rawCase);
+	var caseOn = curryN(4, rawCase);
+
+	function Type(desc) {
+	  var obj = {};
+	  for (var key in desc) {
+	    obj[key] = Constructor(obj, key, desc[key]);
+	  }
+	  obj.case = typeCase(obj);
+	  obj.caseOn = caseOn(obj);
+	  return obj;
+	}
+
+	module.exports = Type;
+
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var _curry2 = __webpack_require__(9);
+	var _curryN = __webpack_require__(11);
+	var arity = __webpack_require__(12);
+
+
+	/**
+	 * Returns a curried equivalent of the provided function, with the
+	 * specified arity. The curried function has two unusual capabilities.
+	 * First, its arguments needn't be provided one at a time. If `g` is
+	 * `R.curryN(3, f)`, the following are equivalent:
+	 *
+	 *   - `g(1)(2)(3)`
+	 *   - `g(1)(2, 3)`
+	 *   - `g(1, 2)(3)`
+	 *   - `g(1, 2, 3)`
+	 *
+	 * Secondly, the special placeholder value `R.__` may be used to specify
+	 * "gaps", allowing partial application of any combination of arguments,
+	 * regardless of their positions. If `g` is as above and `_` is `R.__`,
+	 * the following are equivalent:
+	 *
+	 *   - `g(1, 2, 3)`
+	 *   - `g(_, 2, 3)(1)`
+	 *   - `g(_, _, 3)(1)(2)`
+	 *   - `g(_, _, 3)(1, 2)`
+	 *   - `g(_, 2)(1)(3)`
+	 *   - `g(_, 2)(1, 3)`
+	 *   - `g(_, 2)(_, 3)(1)`
+	 *
+	 * @func
+	 * @memberOf R
+	 * @category Function
+	 * @sig Number -> (* -> a) -> (* -> a)
+	 * @param {Number} length The arity for the returned function.
+	 * @param {Function} fn The function to curry.
+	 * @return {Function} A new, curried function.
+	 * @see R.curry
+	 * @example
+	 *
+	 *      var addFourNumbers = function() {
+	 *        return R.sum([].slice.call(arguments, 0, 4));
+	 *      };
+	 *
+	 *      var curriedAddFourNumbers = R.curryN(4, addFourNumbers);
+	 *      var f = curriedAddFourNumbers(1, 2);
+	 *      var g = f(3);
+	 *      g(4); //=> 10
+	 */
+	module.exports = _curry2(function curryN(length, fn) {
+	  return arity(length, _curryN(length, [], fn));
+	});
+
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var _curry1 = __webpack_require__(10);
+
+
+	/**
+	 * Optimized internal two-arity curry function.
+	 *
+	 * @private
+	 * @category Function
+	 * @param {Function} fn The function to curry.
+	 * @return {Function} The curried function.
+	 */
+	module.exports = function _curry2(fn) {
+	  return function f2(a, b) {
+	    var n = arguments.length;
+	    if (n === 0) {
+	      return f2;
+	    } else if (n === 1 && a != null && a['@@functional/placeholder'] === true) {
+	      return f2;
+	    } else if (n === 1) {
+	      return _curry1(function(b) { return fn(a, b); });
+	    } else if (n === 2 && a != null && a['@@functional/placeholder'] === true &&
+	                          b != null && b['@@functional/placeholder'] === true) {
+	      return f2;
+	    } else if (n === 2 && a != null && a['@@functional/placeholder'] === true) {
+	      return _curry1(function(a) { return fn(a, b); });
+	    } else if (n === 2 && b != null && b['@@functional/placeholder'] === true) {
+	      return _curry1(function(b) { return fn(a, b); });
+	    } else {
+	      return fn(a, b);
+	    }
+	  };
+	};
+
+
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
+	/**
+	 * Optimized internal two-arity curry function.
+	 *
+	 * @private
+	 * @category Function
+	 * @param {Function} fn The function to curry.
+	 * @return {Function} The curried function.
+	 */
+	module.exports = function _curry1(fn) {
+	  return function f1(a) {
+	    if (arguments.length === 0) {
+	      return f1;
+	    } else if (a != null && a['@@functional/placeholder'] === true) {
+	      return f1;
+	    } else {
+	      return fn(a);
+	    }
+	  };
+	};
+
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var arity = __webpack_require__(12);
+
+
+	/**
+	 * Internal curryN function.
+	 *
+	 * @private
+	 * @category Function
+	 * @param {Number} length The arity of the curried function.
+	 * @return {array} An array of arguments received thus far.
+	 * @param {Function} fn The function to curry.
+	 */
+	module.exports = function _curryN(length, received, fn) {
+	  return function() {
+	    var combined = [];
+	    var argsIdx = 0;
+	    var left = length;
+	    var combinedIdx = 0;
+	    while (combinedIdx < received.length || argsIdx < arguments.length) {
+	      var result;
+	      if (combinedIdx < received.length &&
+	          (received[combinedIdx] == null ||
+	           received[combinedIdx]['@@functional/placeholder'] !== true ||
+	           argsIdx >= arguments.length)) {
+	        result = received[combinedIdx];
+	      } else {
+	        result = arguments[argsIdx];
+	        argsIdx += 1;
+	      }
+	      combined[combinedIdx] = result;
+	      if (result == null || result['@@functional/placeholder'] !== true) {
+	        left -= 1;
+	      }
+	      combinedIdx += 1;
+	    }
+	    return left <= 0 ? fn.apply(this, combined) : arity(left, _curryN(length, combined, fn));
+	  };
+	};
+
+
+/***/ },
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var _curry2 = __webpack_require__(9);
+
+
+	/**
+	 * Wraps a function of any arity (including nullary) in a function that accepts exactly `n`
+	 * parameters. Unlike `nAry`, which passes only `n` arguments to the wrapped function,
+	 * functions produced by `arity` will pass all provided arguments to the wrapped function.
+	 *
+	 * @func
+	 * @memberOf R
+	 * @sig (Number, (* -> *)) -> (* -> *)
+	 * @category Function
+	 * @param {Number} n The desired arity of the returned function.
+	 * @param {Function} fn The function to wrap.
+	 * @return {Function} A new function wrapping `fn`. The new function is
+	 *         guaranteed to be of arity `n`.
+	 * @deprecated since v0.15.0
+	 * @example
+	 *
+	 *      var takesTwoArgs = function(a, b) {
+	 *        return [a, b];
+	 *      };
+	 *      takesTwoArgs.length; //=> 2
+	 *      takesTwoArgs(1, 2); //=> [1, 2]
+	 *
+	 *      var takesOneArg = R.arity(1, takesTwoArgs);
+	 *      takesOneArg.length; //=> 1
+	 *      // All arguments are passed through to the wrapped function
+	 *      takesOneArg(1, 2); //=> [1, 2]
+	 */
+	module.exports = _curry2(function(n, fn) {
+	  // jshint unused:vars
+	  switch (n) {
+	    case 0: return function() {return fn.apply(this, arguments);};
+	    case 1: return function(a0) {return fn.apply(this, arguments);};
+	    case 2: return function(a0, a1) {return fn.apply(this, arguments);};
+	    case 3: return function(a0, a1, a2) {return fn.apply(this, arguments);};
+	    case 4: return function(a0, a1, a2, a3) {return fn.apply(this, arguments);};
+	    case 5: return function(a0, a1, a2, a3, a4) {return fn.apply(this, arguments);};
+	    case 6: return function(a0, a1, a2, a3, a4, a5) {return fn.apply(this, arguments);};
+	    case 7: return function(a0, a1, a2, a3, a4, a5, a6) {return fn.apply(this, arguments);};
+	    case 8: return function(a0, a1, a2, a3, a4, a5, a6, a7) {return fn.apply(this, arguments);};
+	    case 9: return function(a0, a1, a2, a3, a4, a5, a6, a7, a8) {return fn.apply(this, arguments);};
+	    case 10: return function(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) {return fn.apply(this, arguments);};
+	    default: throw new Error('First argument to arity must be a non-negative integer no greater than ten');
+	  }
+	});
+
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.render = undefined;
+
+	var _renderString = __webpack_require__(14);
+
+	var render = _renderString.renderString;
+
+	exports.render = render;
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.renderString = renderString;
+
+	var _element = __webpack_require__(4);
+
+	/**
+	 * Turn an object of key/value pairs into a HTML attribute string. This
+	 * function is responsible for what attributes are allowed to be rendered and
+	 * should handle any other special cases specific to deku.
+	 */
+
+	function attributesToString(attributes) {
+	  var str = '';
+	  for (var name in attributes) {
+	    var value = attributes[name];
+	    if (name === 'innerHTML') continue;
+	    if ((0, _element.isValidAttribute)(value)) str += ' ' + name + '="' + attributes[name] + '"';
+	  }
+	  return str;
+	}
+
+	/**
+	 * Render a virtual element to a string. You can pass in an option state context
+	 * object that will be given to all components.
+	 */
+
+	function renderString(element, context) {
+	  var path = arguments.length <= 2 || arguments[2] === undefined ? '0' : arguments[2];
+
+	  if ((0, _element.isText)(element)) {
+	    return element.nodeValue;
+	  }
+
+	  if ((0, _element.isEmpty)(element)) {
+	    return '<noscript></noscript>';
+	  }
+
+	  if ((0, _element.isThunk)(element)) {
+	    var props = element.props;
+	    var component = element.component;
+	    var _children = element.children;
+	    var render = component.render;
+
+	    var output = render({
+	      children: _children,
+	      props: props,
+	      path: path,
+	      context: context
+	    });
+	    return renderString(output, context, path);
+	  }
+
+	  var attributes = element.attributes;
+	  var type = element.type;
+	  var children = element.children;
+
+	  var innerHTML = attributes.innerHTML;
+	  var str = '<' + type + attributesToString(attributes) + '>';
+
+	  if (innerHTML) {
+	    str += innerHTML;
+	  } else {
+	    str += children.map(function (child, i) {
+	      return renderString(child, context, path + '.' + (child.key == null ? i : child.key));
+	    }).join('');
+	  }
+
+	  str += '</' + type + '>';
+	  return str;
+	}
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.update = exports.create = undefined;
+
+	var _create = __webpack_require__(16);
+
+	var _create2 = _interopRequireDefault(_create);
+
+	var _update = __webpack_require__(25);
+
+	var _update2 = _interopRequireDefault(_update);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.create = _create2.default;
+	exports.update = _update2.default;
+
+/***/ },
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = createElement;
+
+	var _element = __webpack_require__(4);
+
+	var _setAttribute = __webpack_require__(17);
+
+	var _svg = __webpack_require__(23);
+
+	var _svg2 = _interopRequireDefault(_svg);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var cache = {};
+
+	/**
+	 * Create a real DOM element from a virtual element, recursively looping down.
+	 * When it finds custom elements it will render them, cache them, and keep going,
+	 * so they are treated like any other native element.
+	 */
+
+	function createElement(vnode, path, dispatch, context) {
+	  if ((0, _element.isText)(vnode)) {
+	    var value = typeof vnode.nodeValue === 'string' || typeof vnode.nodeValue === 'number' ? vnode.nodeValue : '';
+	    return document.createTextNode(value);
+	  }
+
+	  if ((0, _element.isEmpty)(vnode)) {
+	    return document.createElement('noscript');
+	  }
+
+	  if ((0, _element.isThunk)(vnode)) {
+	    var props = vnode.props;
+	    var component = vnode.component;
+	    var children = vnode.children;
+	    var onCreate = component.onCreate;
+
+	    var render = typeof component === 'function' ? component : component.render;
+	    var model = {
+	      children: children,
+	      props: props,
+	      path: path,
+	      dispatch: dispatch,
+	      context: context
+	    };
+	    var output = render(model);
+	    var _DOMElement = createElement(output, (0, _element.createPath)(path, output.key || '0'), dispatch, context);
+	    if (onCreate) onCreate(model);
+	    vnode.state = {
+	      vnode: output,
+	      model: model
+	    };
+	    return _DOMElement;
+	  }
+
+	  var cached = cache[vnode.type];
+
+	  if (typeof cached === 'undefined') {
+	    cached = cache[vnode.type] = _svg2.default.isElement(vnode.type) ? document.createElementNS(_svg2.default.namespace, vnode.type) : document.createElement(vnode.type);
+	  }
+
+	  var DOMElement = cached.cloneNode(false);
+
+	  for (var name in vnode.attributes) {
+	    (0, _setAttribute.setAttribute)(DOMElement, name, vnode.attributes[name]);
+	  }
+
+	  vnode.children.forEach(function (node, index) {
+	    if (node === null || node === undefined) {
+	      return;
+	    }
+	    var child = createElement(node, (0, _element.createPath)(path, node.key || index), dispatch, context);
+	    DOMElement.appendChild(child);
+	  });
+
+	  return DOMElement;
+	}
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.removeAttribute = removeAttribute;
+	exports.setAttribute = setAttribute;
+
+	var _svgAttributeNamespace = __webpack_require__(18);
+
+	var _svgAttributeNamespace2 = _interopRequireDefault(_svgAttributeNamespace);
+
+	var _element = __webpack_require__(4);
+
+	var _indexOf = __webpack_require__(19);
+
+	var _indexOf2 = _interopRequireDefault(_indexOf);
+
+	var _setify = __webpack_require__(20);
+
+	var _setify2 = _interopRequireDefault(_setify);
+
+	var _events = __webpack_require__(22);
+
+	var _events2 = _interopRequireDefault(_events);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function removeAttribute(DOMElement, name, previousValue) {
+	  var eventType = _events2.default[name];
+	  if (eventType) {
+	    if (typeof previousValue === 'function') {
+	      DOMElement.removeEventListener(eventType, previousValue);
+	    }
+	    return;
+	  }
+	  switch (name) {
+	    case 'checked':
+	    case 'disabled':
+	    case 'selected':
+	      DOMElement[name] = false;
+	      break;
+	    case 'innerHTML':
+	    case 'nodeValue':
+	      DOMElement.innerHTML = '';
+	      break;
+	    case 'value':
+	      DOMElement.value = '';
+	      break;
+	    default:
+	      DOMElement.removeAttribute(name);
+	      break;
+	  }
+	}
+
+	function setAttribute(DOMElement, name, value, previousValue) {
+	  var eventType = _events2.default[name];
+	  if (value === previousValue) {
+	    return;
+	  }
+	  if (eventType) {
+	    if (typeof previousValue === 'function') {
+	      DOMElement.removeEventListener(eventType, previousValue);
+	    }
+	    DOMElement.addEventListener(eventType, value);
+	    return;
+	  }
+	  if (!(0, _element.isValidAttribute)(value)) {
+	    removeAttribute(DOMElement, name, previousValue);
+	    return;
+	  }
+	  switch (name) {
+	    case 'checked':
+	    case 'disabled':
+	    case 'innerHTML':
+	    case 'nodeValue':
+	      DOMElement[name] = value;
+	      break;
+	    case 'selected':
+	      DOMElement.selected = value;
+	      // Fix for IE/Safari where select is not correctly selected on change
+	      if (DOMElement.tagName === 'OPTION' && DOMElement.parentNode) {
+	        var select = DOMElement.parentNode;
+	        select.selectedIndex = (0, _indexOf2.default)(select.options, DOMElement);
+	      }
+	      break;
+	    case 'value':
+	      (0, _setify2.default)(DOMElement, value);
+	      break;
+	    default:
+	      DOMElement.setAttributeNS((0, _svgAttributeNamespace2.default)(name), name, value);
+	      break;
+	  }
+	}
+
+/***/ },
+/* 18 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = module.exports['default'] = SvgAttributeNamespace
+
+	/*
+	 * Supported SVG attribute namespaces by prefix.
+	 *
+	 * References:
+	 * - http://www.w3.org/TR/SVGTiny12/attributeTable.html
+	 * - http://www.w3.org/TR/SVG/attindex.html
+	 * - http://www.w3.org/TR/DOM-Level-2-Core/core.html#ID-ElSetAttrNS
+	 */
+
+	var namespaces = module.exports.namespaces = {
+	  ev: 'http://www.w3.org/2001/xml-events',
+	  xlink: 'http://www.w3.org/1999/xlink',
+	  xml: 'http://www.w3.org/XML/1998/namespace',
+	  xmlns: 'http://www.w3.org/2000/xmlns/'
+	}
+
+	/**
+	 * Get namespace of svg attribute
+	 *
+	 * @param {String} attributeName
+	 * @return {String} namespace
+	 */
+
+	function SvgAttributeNamespace (attributeName) {
+	  // if no prefix separator in attributeName, then no namespace
+	  if (attributeName.indexOf(':') === -1) return null
+
+	  // get prefix from attributeName
+	  var prefix = attributeName.split(':', 1)[0]
+
+	  // if prefix in supported prefixes
+	  if (namespaces.hasOwnProperty(prefix)) {
+	    // then namespace of prefix
+	    return namespaces[prefix]
+	  } else {
+	    // else unsupported prefix
+	    throw new Error('svg-attribute-namespace: prefix "' + prefix + '" is not supported by SVG.')
+	  }
+	}
+
+
+/***/ },
+/* 19 */
+/***/ function(module, exports) {
+
+	/*!
 	 * index-of <https://github.com/jonschlinkert/index-of>
 	 *
 	 * Copyright (c) 2014-2015 Jon Schlinkert.
 	 * Licensed under the MIT license.
 	 */
-"use strict";e.exports=function(e,t,n){n=n||0;var r=-1;if(null==e)return r;var o=e.length,u=0>n?o+n:n;if(u>=e.length)return-1;for(;o>u;){if(e[u]===t)return u;u++}return-1}},function(e,t,n){var r=n(21);e.exports=function(e,t){var n=r(e)&&e===document.activeElement;if(n){var o=e.selectionStart,u=e.selectionEnd;e.value=t,e.setSelectionRange(o,u)}else e.value=t}},function(e,t){var n=["text","search","tel","url","password"];e.exports=function(e){return!(!e.setSelectionRange||!~n.indexOf(e.type))}},function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t["default"]={onAbort:"abort",onAnimationStart:"animationstart",onAnimationIteration:"animationiteration",onAnimationEnd:"animationend",onBlur:"blur",onCanPlay:"canplay",onCanPlayThrough:"canplaythrough",onChange:"change",onClick:"click",onContextMenu:"contextmenu",onCopy:"copy",onCut:"cut",onDoubleClick:"dblclick",onDrag:"drag",onDragEnd:"dragend",onDragEnter:"dragenter",onDragExit:"dragexit",onDragLeave:"dragleave",onDragOver:"dragover",onDragStart:"dragstart",onDrop:"drop",onDurationChange:"durationchange",onEmptied:"emptied",onEncrypted:"encrypted",onEnded:"ended",onError:"error",onFocus:"focus",onInput:"input",onInvalid:"invalid",onKeyDown:"keydown",onKeyPress:"keypress",onKeyUp:"keyup",onLoad:"load",onLoadedData:"loadeddata",onLoadedMetadata:"loadedmetadata",onLoadStart:"loadstart",onPause:"pause",onPlay:"play",onPlaying:"playing",onProgress:"progress",onMouseDown:"mousedown",onMouseEnter:"mouseenter",onMouseLeave:"mouseleave",onMouseMove:"mousemove",onMouseOut:"mouseout",onMouseOver:"mouseover",onMouseUp:"mouseup",onPaste:"paste",onRateChange:"ratechange",onReset:"reset",onScroll:"scroll",onSeeked:"seeked",onSeeking:"seeking",onSubmit:"submit",onStalled:"stalled",onSuspend:"suspend",onTimeUpdate:"timeupdate",onTransitionEnd:"transitionend",onTouchCancel:"touchcancel",onTouchEnd:"touchend",onTouchMove:"touchmove",onTouchStart:"touchstart",onVolumeChange:"volumechange",onWaiting:"waiting",onWheel:"wheel"}},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=n(24),o="http://www.w3.org/2000/svg";t["default"]={isElement:r.isElement,namespace:o}},function(e,t){t.elements={animate:!0,circle:!0,defs:!0,ellipse:!0,g:!0,line:!0,linearGradient:!0,mask:!0,path:!0,pattern:!0,polygon:!0,polyline:!0,radialGradient:!0,rect:!0,stop:!0,svg:!0,text:!0,tspan:!0},t.isElement=function(e){return e in t.elements}},function(e,t,n){"use strict";function r(e){return e&&e.__esModule?e:{"default":e}}function o(e,t){return function(n,r){return d.Actions["case"]({setAttribute:function(e,t,r){(0,a.setAttribute)(n,e,t,r)},removeAttribute:function(e,t){(0,a.removeAttribute)(n,e,t)},insertBefore:function(e){s(n.parentNode,e,n)},sameNode:function(){},updateChildren:function(r){var u=Array.prototype.slice.apply(n.childNodes);r.forEach(function(r){d.Actions["case"]({insertChild:function(r,o,u){s(n,o,(0,c["default"])(r,u,e,t))},removeChild:function(e){n.removeChild(u[e])},updateChild:function(n,r){var a=o(e,t);r.forEach(function(e){return a(u[n],e)})}},r)})},updateThunk:function(r,u,a){var l=u.props,c=u.children,s=u.component,f=s.onUpdate,p="function"==typeof s?s:s.render,v=r.state.vnode,h={children:c,props:l,path:a,dispatch:e,context:t},y=p(h),m=(0,d.diffNode)(v,y,(0,i.createPath)(a,"0"));n=m.reduce(o(e,t),n),f&&f(h),u.state={vnode:y,model:h}},replaceNode:function(r,o,a){var i=(0,c["default"])(o,a,e,t),l=n.parentNode;l&&l.replaceChild(i,n),n=i,u(r)},removeNode:function(e){u(e),n.parentNode.removeChild(n),n=null}},r),n}}function u(e){for(;(0,i.isThunk)(e);){var t=e,n=t.component,r=t.state,o=n.onRemove,a=r.model;o&&o(a),e=r.vnode}if(e.children)for(var l=0;l<e.children.length;l++)u(e.children[l])}Object.defineProperty(t,"__esModule",{value:!0}),t.insertAtIndex=void 0,t["default"]=o;var a=n(17),i=n(4),l=n(16),c=r(l),d=n(3),s=t.insertAtIndex=function(e,t,n){var r=e.childNodes[t];r?e.insertBefore(n,r):e.appendChild(n)}},function(e,t,n){"use strict";function r(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var n in e)Object.prototype.hasOwnProperty.call(e,n)&&(t[n]=e[n]);return t["default"]=e,t}function o(e,t){var n=arguments.length<=2||void 0===arguments[2]?{}:arguments[2],r=null,o=null,u=n.id||"0";e&&e.childNodes.length>0&&(e.innerHTML="");var l=function(e,n){var l=(0,i.diffNode)(r,e,u);return o=l.reduce(a.update(t,n),o),r=e,o},c=function(n,i){return o=a.create(n,u,t,i),e&&e.appendChild(o),r=n,o};return function(e){var t=arguments.length<=1||void 0===arguments[1]?{}:arguments[1];return null!==o?l(e,t):c(e,t)}}Object.defineProperty(t,"__esModule",{value:!0}),t.create=o;var u=n(15),a=r(u),i=n(3)},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Main=void 0;var r=n(2),o=n(28),u=n(32),a=n(33);t.Main={render:function(e){var t,n=e.props,i=n.data,l=i.location;return"table"===l?t=(0,r.element)(o.Table,{data:i.table}):"anim"===l?t=(0,r.element)(u.Anim,{data:i.anim}):"tree"===l&&(t=(0,r.element)(a.Tree,{data:i.tree})),(0,r.element)("div",{"class":"Main"},t)}}},function(e,t,n){"use strict";function r(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(t,"__esModule",{value:!0}),t.Table=void 0;var o=n(2),u=n(29),a=r(u),i=(0,a["default"])({initialState:function(e){var t=e.props;return{onClick:function(e){console.log("Clicked"+t.text),e.stopPropagation()}}},render:function(e){var t=e.state,n=(e.setState,e.props);return(0,o.element)("td",{"class":"TableCell",onClick:t.onClick},n.text)}}),l=(0,a["default"])({render:function(e){var t=e.props,n=(e.setState,t.data),r="TableRow";n.active&&(r="TableRow active");for(var u=n.props,a=[(0,o.element)(i,{text:"#"+n.id})],l=0;l<u.length;l++)a.push((0,o.element)(i,{text:u[l]}));return(0,o.element)("tr",{"class":r,"data-id":n.id},a)}});t.Table=(0,a["default"])({render:function(e){for(var t=e.props,n=(e.setState,t.data.items),r=[],u=0;u<n.length;u++){var a=n[u];r.push((0,o.element)(l,{key:a.id,data:a}))}return(0,o.element)("table",{"class":"Table"},(0,o.element)("tbody",null,r))}})},function(e,t,n){var r=n(30),o=n(31);e.exports=function(e,t){function n(t){return s.hasOwnProperty(t.path)||(s[t.path]=e.initialState&&e.initialState(t)),e.render(c(t))}function u(e){return function(t){"object"==typeof s[e.path]&&"object"==typeof t?s[e.path]=r({},s[e.path],t):s[e.path]=t,d=e.dispatch,f()}}function a(t){delete s[t.path],e.onRemove&&e.onRemove(t)}function i(t){e.onUpdate&&e.onUpdate(c(t))}function l(t){e.onCreate&&e.onCreate(c(t))}function c(e){return r({},e,{state:s[e.path],setState:u(e)})}t||(t={}),t.action||(t.action={type:"UI_STATE_CHANGE"});var d,s={},f=o(function(){d(t.action)},0);return r({},e,{render:n,onRemove:a,onUpdate:i,onCreate:l})}},function(e,t){"use strict";function n(e){if(null===e||void 0===e)throw new TypeError("Object.assign cannot be called with null or undefined");return Object(e)}var r=Object.prototype.hasOwnProperty,o=Object.prototype.propertyIsEnumerable;e.exports=Object.assign||function(e,t){for(var u,a,i=n(e),l=1;l<arguments.length;l++){u=Object(arguments[l]);for(var c in u)r.call(u,c)&&(i[c]=u[c]);if(Object.getOwnPropertySymbols){a=Object.getOwnPropertySymbols(u);for(var d=0;d<a.length;d++)o.call(u,a[d])&&(i[a[d]]=u[a[d]])}}return i}},function(e,t){e.exports=function(e,t){var n;return function(){clearTimeout(n),n=setTimeout(e,t)}}},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.Anim=void 0;var r=n(2),o={render:function(e){var t=e.props,n=t.data,o=n.time,u="border-radius: "+(o%10).toString()+"px; background: rgba(0,0,0,"+(.5+o%10/10).toString()+")";return(0,r.element)("div",{"class":"AnimBox","data-id":n.id,style:u})}};t.Anim={render:function(e){for(var t=e.props,n=t.data,u=n.items,a=[],i=0;i<u.length;i++){var l=u[i];a.push((0,r.element)(o,{key:l.id,data:l}))}return(0,r.element)("div",{"class":"Anim"},a)}}},function(e,t,n){"use strict";function r(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(t,"__esModule",{value:!0}),t.Tree=void 0;var o=n(2),u=n(29),a=r(u),i=(0,a["default"])({render:function(e){var t=e.props;e.setState;return(0,o.element)("li",{"class":"TreeLeaf"},t.data.id)}}),l=(0,a["default"])({render:function(e){for(var t=e.props,n=(e.setState,t.data),r=[],u=0;u<n.children.length;u++){var a=n.children[u];a.container?r.push((0,o.element)(l,{key:a.id,data:a})):r.push((0,o.element)(i,{key:a.id,data:a}))}return(0,o.element)("ul",{"class":"TreeNode"},r)}});t.Tree=(0,a["default"])({render:function(e){var t=e.props;e.setState;return(0,o.element)("div",{"class":"Tree"},(0,o.element)(l,{data:t.data.root}))}})}]);
+
+	'use strict';
+
+	module.exports = function indexOf(arr, ele, start) {
+	  start = start || 0;
+	  var idx = -1;
+
+	  if (arr == null) return idx;
+	  var len = arr.length;
+	  var i = start < 0
+	    ? (len + start)
+	    : start;
+
+	  if (i >= arr.length) {
+	    return -1;
+	  }
+
+	  while (i < len) {
+	    if (arr[i] === ele) {
+	      return i;
+	    }
+	    i++;
+	  }
+
+	  return -1;
+	};
+
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var naturalSelection = __webpack_require__(21);
+
+	module.exports = function(element, value){
+	    var canSet = naturalSelection(element) && element === document.activeElement;
+
+	    if (canSet) {
+	        var start = element.selectionStart,
+	            end = element.selectionEnd;
+
+	        element.value = value;
+	        element.setSelectionRange(start, end);
+	    } else {
+	        element.value = value;
+	    }
+	};
+
+
+/***/ },
+/* 21 */
+/***/ function(module, exports) {
+
+	var supportedTypes = ['text', 'search', 'tel', 'url', 'password'];
+
+	module.exports = function(element){
+	    return !!(element.setSelectionRange && ~supportedTypes.indexOf(element.type));
+	};
+
+
+/***/ },
+/* 22 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	/**
+	 * Special attributes that map to DOM events.
+	 */
+
+	exports.default = {
+	  onAbort: 'abort',
+	  onAnimationStart: 'animationstart',
+	  onAnimationIteration: 'animationiteration',
+	  onAnimationEnd: 'animationend',
+	  onBlur: 'blur',
+	  onCanPlay: 'canplay',
+	  onCanPlayThrough: 'canplaythrough',
+	  onChange: 'change',
+	  onClick: 'click',
+	  onContextMenu: 'contextmenu',
+	  onCopy: 'copy',
+	  onCut: 'cut',
+	  onDoubleClick: 'dblclick',
+	  onDrag: 'drag',
+	  onDragEnd: 'dragend',
+	  onDragEnter: 'dragenter',
+	  onDragExit: 'dragexit',
+	  onDragLeave: 'dragleave',
+	  onDragOver: 'dragover',
+	  onDragStart: 'dragstart',
+	  onDrop: 'drop',
+	  onDurationChange: 'durationchange',
+	  onEmptied: 'emptied',
+	  onEncrypted: 'encrypted',
+	  onEnded: 'ended',
+	  onError: 'error',
+	  onFocus: 'focus',
+	  onInput: 'input',
+	  onInvalid: 'invalid',
+	  onKeyDown: 'keydown',
+	  onKeyPress: 'keypress',
+	  onKeyUp: 'keyup',
+	  onLoad: 'load',
+	  onLoadedData: 'loadeddata',
+	  onLoadedMetadata: 'loadedmetadata',
+	  onLoadStart: 'loadstart',
+	  onPause: 'pause',
+	  onPlay: 'play',
+	  onPlaying: 'playing',
+	  onProgress: 'progress',
+	  onMouseDown: 'mousedown',
+	  onMouseEnter: 'mouseenter',
+	  onMouseLeave: 'mouseleave',
+	  onMouseMove: 'mousemove',
+	  onMouseOut: 'mouseout',
+	  onMouseOver: 'mouseover',
+	  onMouseUp: 'mouseup',
+	  onPaste: 'paste',
+	  onRateChange: 'ratechange',
+	  onReset: 'reset',
+	  onScroll: 'scroll',
+	  onSeeked: 'seeked',
+	  onSeeking: 'seeking',
+	  onSubmit: 'submit',
+	  onStalled: 'stalled',
+	  onSuspend: 'suspend',
+	  onTimeUpdate: 'timeupdate',
+	  onTransitionEnd: 'transitionend',
+	  onTouchCancel: 'touchcancel',
+	  onTouchEnd: 'touchend',
+	  onTouchMove: 'touchmove',
+	  onTouchStart: 'touchstart',
+	  onVolumeChange: 'volumechange',
+	  onWaiting: 'waiting',
+	  onWheel: 'wheel'
+	};
+
+/***/ },
+/* 23 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _isSvgElement = __webpack_require__(24);
+
+	var namespace = 'http://www.w3.org/2000/svg';
+
+	exports.default = {
+	  isElement: _isSvgElement.isElement,
+	  namespace: namespace
+	};
+
+/***/ },
+/* 24 */
+/***/ function(module, exports) {
+
+	/**
+	 * Supported SVG elements
+	 *
+	 * @type {Array}
+	 */
+
+	exports.elements = {
+	  'animate': true,
+	  'circle': true,
+	  'defs': true,
+	  'ellipse': true,
+	  'g': true,
+	  'line': true,
+	  'linearGradient': true,
+	  'mask': true,
+	  'path': true,
+	  'pattern': true,
+	  'polygon': true,
+	  'polyline': true,
+	  'radialGradient': true,
+	  'rect': true,
+	  'stop': true,
+	  'svg': true,
+	  'text': true,
+	  'tspan': true
+	}
+
+	/**
+	 * Is element's namespace SVG?
+	 *
+	 * @param {String} name
+	 */
+
+	exports.isElement = function (name) {
+	  return name in exports.elements
+	}
+
+
+/***/ },
+/* 25 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.insertAtIndex = undefined;
+	exports.default = patch;
+
+	var _setAttribute2 = __webpack_require__(17);
+
+	var _element = __webpack_require__(4);
+
+	var _create = __webpack_require__(16);
+
+	var _create2 = _interopRequireDefault(_create);
+
+	var _diff = __webpack_require__(3);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * Modify a DOM element given an array of actions. A context can be set
+	 * that will be used to render any custom elements.
+	 */
+
+	function patch(dispatch, context) {
+	  return function (DOMElement, action) {
+	    _diff.Actions.case({
+	      setAttribute: function setAttribute(name, value, previousValue) {
+	        (0, _setAttribute2.setAttribute)(DOMElement, name, value, previousValue);
+	      },
+	      removeAttribute: function removeAttribute(name, previousValue) {
+	        (0, _setAttribute2.removeAttribute)(DOMElement, name, previousValue);
+	      },
+	      insertBefore: function insertBefore(index) {
+	        insertAtIndex(DOMElement.parentNode, index, DOMElement);
+	      },
+	      sameNode: function sameNode() {},
+	      updateChildren: function updateChildren(changes) {
+	        // Create a clone of the children so we can reference them later
+	        // using their original position even if they move around
+	        var childNodes = Array.prototype.slice.apply(DOMElement.childNodes);
+
+	        changes.forEach(function (change) {
+	          _diff.Actions.case({
+	            insertChild: function insertChild(vnode, index, path) {
+	              insertAtIndex(DOMElement, index, (0, _create2.default)(vnode, path, dispatch, context));
+	            },
+	            removeChild: function removeChild(index) {
+	              DOMElement.removeChild(childNodes[index]);
+	            },
+	            updateChild: function updateChild(index, actions) {
+	              var update = patch(dispatch, context);
+	              actions.forEach(function (action) {
+	                return update(childNodes[index], action);
+	              });
+	            }
+	          }, change);
+	        });
+	      },
+	      updateThunk: function updateThunk(prev, next, path) {
+	        var props = next.props;
+	        var children = next.children;
+	        var component = next.component;
+	        var onUpdate = component.onUpdate;
+
+	        var render = typeof component === 'function' ? component : component.render;
+	        var prevNode = prev.state.vnode;
+	        var model = {
+	          children: children,
+	          props: props,
+	          path: path,
+	          dispatch: dispatch,
+	          context: context
+	        };
+	        var nextNode = render(model);
+	        var changes = (0, _diff.diffNode)(prevNode, nextNode, (0, _element.createPath)(path, '0'));
+	        DOMElement = changes.reduce(patch(dispatch, context), DOMElement);
+	        if (onUpdate) onUpdate(model);
+	        next.state = {
+	          vnode: nextNode,
+	          model: model
+	        };
+	      },
+	      replaceNode: function replaceNode(prev, next, path) {
+	        var newEl = (0, _create2.default)(next, path, dispatch, context);
+	        var parentEl = DOMElement.parentNode;
+	        if (parentEl) parentEl.replaceChild(newEl, DOMElement);
+	        DOMElement = newEl;
+	        removeThunks(prev);
+	      },
+	      removeNode: function removeNode(prev) {
+	        removeThunks(prev);
+	        DOMElement.parentNode.removeChild(DOMElement);
+	        DOMElement = null;
+	      }
+	    }, action);
+
+	    return DOMElement;
+	  };
+	}
+
+	/**
+	 * Recursively remove all thunks
+	 */
+
+	function removeThunks(vnode) {
+	  while ((0, _element.isThunk)(vnode)) {
+	    var _vnode = vnode;
+	    var component = _vnode.component;
+	    var state = _vnode.state;
+	    var onRemove = component.onRemove;
+	    var model = state.model;
+
+	    if (onRemove) onRemove(model);
+	    vnode = state.vnode;
+	  }
+
+	  if (vnode.children) {
+	    for (var i = 0; i < vnode.children.length; i++) {
+	      removeThunks(vnode.children[i]);
+	    }
+	  }
+	}
+
+	/**
+	 * Slightly nicer insertBefore
+	 */
+
+	var insertAtIndex = exports.insertAtIndex = function insertAtIndex(parent, index, el) {
+	  var target = parent.childNodes[index];
+	  if (target) {
+	    parent.insertBefore(el, target);
+	  } else {
+	    parent.appendChild(el);
+	  }
+	};
+
+/***/ },
+/* 26 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.create = create;
+
+	var _dom = __webpack_require__(15);
+
+	var dom = _interopRequireWildcard(_dom);
+
+	var _diff = __webpack_require__(3);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	/**
+	 * Create a DOM renderer using a container element. Everything will be rendered
+	 * inside of that container. Returns a function that accepts new state that can
+	 * replace what is currently rendered.
+	 */
+
+	function create(container, dispatch) {
+	  var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+
+	  var oldVnode = null;
+	  var node = null;
+	  var rootId = options.id || '0';
+
+	  if (container && container.childNodes.length > 0) {
+	    container.innerHTML = '';
+	  }
+
+	  var update = function update(newVnode, context) {
+	    var changes = (0, _diff.diffNode)(oldVnode, newVnode, rootId);
+	    node = changes.reduce(dom.update(dispatch, context), node);
+	    oldVnode = newVnode;
+	    return node;
+	  };
+
+	  var create = function create(vnode, context) {
+	    node = dom.create(vnode, rootId, dispatch, context);
+	    if (container) container.appendChild(node);
+	    oldVnode = vnode;
+	    return node;
+	  };
+
+	  return function (vnode) {
+	    var context = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+
+	    return node !== null ? update(vnode, context) : create(vnode, context);
+	  };
+	}
+
+/***/ },
+/* 27 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Main = undefined;
+
+	var _deku = __webpack_require__(2);
+
+	var _table = __webpack_require__(28);
+
+	var _anim = __webpack_require__(32);
+
+	var _tree = __webpack_require__(33);
+
+	/** @jsx element */
+
+	var Main = exports.Main = {
+	  render: function render(_ref) {
+	    var props = _ref.props;
+
+	    var data = props.data;
+	    var location = data.location;
+
+	    var section;
+	    if (location === 'table') {
+	      section = (0, _deku.element)(_table.Table, { data: data.table });
+	    } else if (location === 'anim') {
+	      section = (0, _deku.element)(_anim.Anim, { data: data.anim });
+	    } else if (location === 'tree') {
+	      section = (0, _deku.element)(_tree.Tree, { data: data.tree });
+	    }
+
+	    return (0, _deku.element)(
+	      'div',
+	      { 'class': 'Main' },
+	      section
+	    );
+	  }
+	};
+
+/***/ },
+/* 28 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Table = undefined;
+
+	var _deku = __webpack_require__(2);
+
+	var _dekuStateful = __webpack_require__(29);
+
+	var _dekuStateful2 = _interopRequireDefault(_dekuStateful);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/** @jsx element */
+
+	var TableCell = (0, _dekuStateful2.default)({
+	  initialState: function initialState(_ref) {
+	    var props = _ref.props;
+
+	    return {
+	      onClick: function onClick(e) {
+	        console.log('Clicked' + props.text);
+	        e.stopPropagation();
+	      }
+	    };
+	  },
+	  render: function render(_ref2) {
+	    var state = _ref2.state;
+	    var setState = _ref2.setState;
+	    var props = _ref2.props;
+
+	    return (0, _deku.element)(
+	      'td',
+	      { 'class': 'TableCell', onClick: state.onClick },
+	      props.text
+	    );
+	  }
+	});
+
+	var TableRow = (0, _dekuStateful2.default)({
+	  render: function render(_ref3) {
+	    var props = _ref3.props;
+	    var setState = _ref3.setState;
+
+	    var data = props.data;
+	    var classes = 'TableRow';
+	    if (data.active) {
+	      classes = 'TableRow active';
+	    }
+	    var cells = data.props;
+
+	    var children = [(0, _deku.element)(TableCell, { text: '#' + data.id })];
+	    for (var i = 0; i < cells.length; i++) {
+	      children.push((0, _deku.element)(TableCell, { text: cells[i] }));
+	    }
+
+	    return (0, _deku.element)(
+	      'tr',
+	      { 'class': classes, 'data-id': data.id },
+	      children
+	    );
+	  }
+	});
+
+	var Table = exports.Table = (0, _dekuStateful2.default)({
+	  render: function render(_ref4) {
+	    var props = _ref4.props;
+	    var setState = _ref4.setState;
+
+	    var items = props.data.items;
+
+	    var children = [];
+	    for (var i = 0; i < items.length; i++) {
+	      var item = items[i];
+	      children.push((0, _deku.element)(TableRow, { key: item.id, data: item }));
+	    }
+
+	    return (0, _deku.element)(
+	      'table',
+	      { 'class': 'Table' },
+	      (0, _deku.element)(
+	        'tbody',
+	        null,
+	        children
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 29 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var assign = __webpack_require__(30)
+	var debounce = __webpack_require__(31)
+
+	module.exports = function stateful (Component, options) {
+	  if (!options) options = {}
+	  if (!options.action) options.action = { type: 'UI_STATE_CHANGE' }
+
+	  var states = {}
+	  var dispatch
+
+	  var update = debounce(function () {
+	    dispatch(options.action)
+	  }, 0)
+
+	  /*
+	   * Pass through `render()` with state and setState added.
+	   * Also, if it's the first render, call `initialState` if it exists.
+	   */
+
+	  function render (model) {
+	    if (!states.hasOwnProperty(model.path)) {
+	      states[model.path] = (Component.initialState && Component.initialState(model))
+	    }
+
+	    return Component.render(decorateModel(model))
+	  }
+
+	  /*
+	   * Updates state and schedules a dispatch on the next tick.
+	   */
+
+	  function setState (model) {
+	    return function (values) {
+	      if (typeof states[model.path] === 'object' && typeof values === 'object') {
+	        states[model.path] = assign({}, states[model.path], values)
+	      } else {
+	        states[model.path] = values
+	      }
+	      dispatch = model.dispatch
+	      update()
+	    }
+	  }
+
+	  /*
+	   * Clear out states on remove.
+	   */
+
+	  function onRemove (model) {
+	    delete states[model.path]
+	    if (Component.onRemove) Component.onRemove(model)
+	  }
+
+	  /*
+	   * Pass through `onUpdate()` with state and setState added.
+	   */
+
+	  function onUpdate (model) {
+	    if (Component.onUpdate) Component.onUpdate(decorateModel(model))
+	  }
+
+	  function onCreate (model) {
+	    if (Component.onCreate) Component.onCreate(decorateModel(model))
+	  }
+
+	  /*
+	   * Adds `state` and `setState` to the model.
+	   */
+
+	  function decorateModel (model) {
+	    return assign({}, model, {
+	      state: states[model.path],
+	      setState: setState(model)
+	    })
+	  }
+
+	  return assign({}, Component, {
+	    render: render,
+	    onRemove: onRemove,
+	    onUpdate: onUpdate,
+	    onCreate: onCreate
+	  })
+	}
+
+
+/***/ },
+/* 30 */
+/***/ function(module, exports) {
+
+	/* eslint-disable no-unused-vars */
+	'use strict';
+	var hasOwnProperty = Object.prototype.hasOwnProperty;
+	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+	function toObject(val) {
+		if (val === null || val === undefined) {
+			throw new TypeError('Object.assign cannot be called with null or undefined');
+		}
+
+		return Object(val);
+	}
+
+	module.exports = Object.assign || function (target, source) {
+		var from;
+		var to = toObject(target);
+		var symbols;
+
+		for (var s = 1; s < arguments.length; s++) {
+			from = Object(arguments[s]);
+
+			for (var key in from) {
+				if (hasOwnProperty.call(from, key)) {
+					to[key] = from[key];
+				}
+			}
+
+			if (Object.getOwnPropertySymbols) {
+				symbols = Object.getOwnPropertySymbols(from);
+				for (var i = 0; i < symbols.length; i++) {
+					if (propIsEnumerable.call(from, symbols[i])) {
+						to[symbols[i]] = from[symbols[i]];
+					}
+				}
+			}
+		}
+
+		return to;
+	};
+
+
+/***/ },
+/* 31 */
+/***/ function(module, exports) {
+
+	// thanks https://github.com/riot/route/blob/master/lib/index.js
+	module.exports = function debounce (fn, delay) {
+	  var t
+	  return function () {
+	    clearTimeout(t)
+	    t = setTimeout(fn, delay)
+	  }
+	}
+
+
+/***/ },
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Anim = undefined;
+
+	var _deku = __webpack_require__(2);
+
+	var AnimBox = {
+	  render: function render(_ref) {
+	    var props = _ref.props;
+
+	    var data = props.data;
+	    var time = data.time;
+	    var style = "border-radius: " + (time % 10).toString() + "px; background: rgba(0,0,0," + (0.5 + time % 10 / 10).toString() + ")";
+
+	    return (0, _deku.element)("div", { "class": "AnimBox", "data-id": data.id, style: style });
+	  }
+	}; /** @jsx element */
+
+	var Anim = exports.Anim = {
+	  render: function render(_ref2) {
+	    var props = _ref2.props;
+
+	    var data = props.data;
+	    var items = data.items;
+
+	    var children = [];
+	    for (var i = 0; i < items.length; i++) {
+	      var item = items[i];
+	      children.push((0, _deku.element)(AnimBox, { key: item.id, data: item }));
+	    }
+
+	    return (0, _deku.element)(
+	      "div",
+	      { "class": "Anim" },
+	      children
+	    );
+	  }
+	};
+
+/***/ },
+/* 33 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Tree = undefined;
+
+	var _deku = __webpack_require__(2);
+
+	var _dekuStateful = __webpack_require__(29);
+
+	var _dekuStateful2 = _interopRequireDefault(_dekuStateful);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/** @jsx element */
+
+	var TreeLeaf = (0, _dekuStateful2.default)({
+	  render: function render(_ref) {
+	    var props = _ref.props;
+	    var setState = _ref.setState;
+
+	    return (0, _deku.element)(
+	      'li',
+	      { 'class': 'TreeLeaf' },
+	      props.data.id
+	    );
+	  }
+	});
+
+	var TreeNode = (0, _dekuStateful2.default)({
+	  render: function render(_ref2) {
+	    var props = _ref2.props;
+	    var setState = _ref2.setState;
+
+	    var data = props.data;
+	    var children = [];
+
+	    for (var i = 0; i < data.children.length; i++) {
+	      var n = data.children[i];
+	      if (n.container) {
+	        children.push((0, _deku.element)(TreeNode, { key: n.id, data: n }));
+	      } else {
+	        children.push((0, _deku.element)(TreeLeaf, { key: n.id, data: n }));
+	      }
+	    }
+
+	    return (0, _deku.element)(
+	      'ul',
+	      { 'class': 'TreeNode' },
+	      children
+	    );
+	  }
+	});
+
+	var Tree = exports.Tree = (0, _dekuStateful2.default)({
+	  render: function render(_ref3) {
+	    var props = _ref3.props;
+	    var setState = _ref3.setState;
+
+	    return (0, _deku.element)(
+	      'div',
+	      { 'class': 'Tree' },
+	      (0, _deku.element)(TreeNode, { data: props.data.root })
+	    );
+	  }
+	});
+
+/***/ }
+/******/ ]);
