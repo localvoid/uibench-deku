@@ -59,7 +59,7 @@
 
 	/** @jsx element */
 
-	uibench.init('Deku', '2.0.0');
+	uibench.init('Deku', '2.0.2');
 
 	document.addEventListener('DOMContentLoaded', function (e) {
 	  var container = document.querySelector('#App');
