@@ -1,6 +1,6 @@
 /** @jsx element */
 
-import element from 'virtual-element'
+import { element } from 'deku'
 
 let TreeLeaf = {
   shouldUpdate(component, nextProps, nextState) {

@@ -1,6 +1,6 @@
 /** @jsx element */
 
-import element from 'virtual-element'
+import { element } from 'deku'
 
 import {Table} from './table';
 import {Anim} from './anim';
