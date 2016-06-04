@@ -16,9 +16,8 @@
     "benchmark"
   ],
   "dependencies": {
-    "deku": "git://github.com/heilage-nsk/deku.git",
-    "deku-stateful": "^1.4.0",
-    "virtual-element": "^1.2.0"
+    "deku": "^2.0.0-rc16",
+    "deku-stateful": "^1.4.0"
   },
   "devDependencies": {
     "babel-core": "^6.4.0",
